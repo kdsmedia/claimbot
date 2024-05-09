@@ -126,7 +126,8 @@ function curl($url, $ua, $data = null){
 
 function head($user, $cookie){
 $ua = [
-    'Host: trxsatoshi.xyz', //berada di menu Request
+    'Host: 99faucet.com',
+ //berada di menu Request
     'User-Agent: '.$user,
     'Cookie: '.$cookie,
 ];
@@ -134,8 +135,10 @@ return $ua;
 }
 
 //BAGIAN DASHBOARD
-$url = "https://trxsatoshi.xyz/dashboard"; //Isi Link Dashboard
-$dash = curl($url, head($user, $cookie));//Jngan di Ubah
+$url = "https://99faucet.com/dashboard";
+ //Isi Link Dashboard
+$dash = curl($url, head($user, $cookie));
+//Jngan di Ubah
 
 $account = explode('</h5>',explode('<h5>',$dash)[1])[0]; //explode bagian Tulisan Balance nya jika ada
 $balance = explode ('</p>',explode('<p class="acc-amount"><i class="fas fa-coins"></i> ',$dash)[1])[0];
@@ -161,9 +164,12 @@ exit;
 
 //FUNGSI WHILE TRUE (PERULANGAN) MENGULANGI
 while(true){
-$url = "https://trxsatoshi.xyz/auto"; //Isi Link Auto 
- $auto = curl($url, head($user, $cookie)); //Jangan Di Ubah
- $token = explode('"',explode('<input type="hidden" name="token" value="',$auto)[1])[0]; // Jangan Di Ubah
+$url = "https://99faucet.com/notimer";
+ //Isi Link Auto 
+ $auto = curl($url, head($user, $cookie));
+ //Jangan Di Ubah
+ $token = explode('"',explode('<input type="hidden" name="token" value="',$auto)[1])[0];
+ // Jangan Di Ubah
 $time = explode(',',explode('let timer = ',$auto)[1])[0];
 //explode Bagian Timer nya atau waktu Auto nya
 
@@ -177,17 +183,22 @@ sleep(1);
 echo "\r                       \r";
 
 //URL AUTO VERIFY
-$url = "https://trxsatoshi.xyz/auto/verify";/// SALIN ALAMAT AUTO VERIFY
+$url = "https://99faucet.com/notimer/verify";
+/// SALIN ALAMAT AUTO VERIFY
 $data = "token=$token";
 $verify = curl($url, head($user, $cookie), $data);
-$claim = explode("'",explode("text: '",$verify)[1])[0];//gak usah di ubah mayoritas web auto faucet begini 
+$claim = explode("'",explode("text: '",$verify)[1])[0];
+//gak usah di ubah mayoritas web auto faucet begini 
 
 echo $lblue2."[".$green2."✅".$lblue2."] ".$green2.$claim."\n";
 
 
-//BACK TO DASHBOARD 
-$url = "https://trxsatoshi.xyz/dashboard"; //URL DASHBOARD 
- $ub = curl($url, head($user, $cookie)); //PERBEDAAN NYA CUMAN $ub ($ub bisa kalian ubah , karena ini update an balance  dashboard yang baru )
+
+//BACK TO DASHBOARD 
+$url = "https://99faucet.com/dashboard";
+ //URL DASHBOARD 
+ $ub = curl($url, head($user, $cookie));
+ //PERBEDAAN NYA CUMAN $ub ($ub bisa kalian ubah , karena ini update an balance  dashboard yang baru )
 $account = explode('</h5>',explode('<h5>',$ub)[1])[0]; //explode nama balance seperti diatas
 $balance = explode ('</p>',explode('<p class="acc-amount"><i class="fas fa-coins"></i> ',$ub)[1])[0]; //explode jumlah balance seperti diatas
 
